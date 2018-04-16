@@ -72,6 +72,8 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="class\datasource\BaseSql.vb" />
+    <Compile Include="class\datasource\DpCodeTable.vb" />
     <Compile Include="class\utils\Profile.vb" />
     <Compile Include="settingPage.Designer.vb">
       <DependentUpon>settingPage.vb</DependentUpon>

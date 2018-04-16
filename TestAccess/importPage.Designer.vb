@@ -23,12 +23,13 @@ Partial Class importPage
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.addImport1 = New System.Windows.Forms.Button()
-        Me.newImport1 = New System.Windows.Forms.Button()
+        Me.addImport1Btn = New System.Windows.Forms.Button()
+        Me.newImport1Btn = New System.Windows.Forms.Button()
         Me.selectFile1Btn = New System.Windows.Forms.Button()
         Me.selectFile2Btn = New System.Windows.Forms.Button()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.setExcelTitleBtn = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'TextBox1
@@ -39,25 +40,25 @@ Partial Class importPage
         Me.TextBox1.Size = New System.Drawing.Size(380, 24)
         Me.TextBox1.TabIndex = 0
         '
-        'addImport1
+        'addImport1Btn
         '
-        Me.addImport1.Font = New System.Drawing.Font("宋体", 11.0!)
-        Me.addImport1.Location = New System.Drawing.Point(620, 53)
-        Me.addImport1.Name = "addImport1"
-        Me.addImport1.Size = New System.Drawing.Size(75, 23)
-        Me.addImport1.TabIndex = 1
-        Me.addImport1.Text = "新增导入"
-        Me.addImport1.UseVisualStyleBackColor = True
+        Me.addImport1Btn.Font = New System.Drawing.Font("宋体", 11.0!)
+        Me.addImport1Btn.Location = New System.Drawing.Point(619, 53)
+        Me.addImport1Btn.Name = "addImport1Btn"
+        Me.addImport1Btn.Size = New System.Drawing.Size(75, 23)
+        Me.addImport1Btn.TabIndex = 1
+        Me.addImport1Btn.Text = "新增导入"
+        Me.addImport1Btn.UseVisualStyleBackColor = True
         '
-        'newImport1
+        'newImport1Btn
         '
-        Me.newImport1.Font = New System.Drawing.Font("宋体", 11.0!)
-        Me.newImport1.Location = New System.Drawing.Point(713, 53)
-        Me.newImport1.Name = "newImport1"
-        Me.newImport1.Size = New System.Drawing.Size(75, 23)
-        Me.newImport1.TabIndex = 2
-        Me.newImport1.Text = "覆盖导入"
-        Me.newImport1.UseVisualStyleBackColor = True
+        Me.newImport1Btn.Font = New System.Drawing.Font("宋体", 11.0!)
+        Me.newImport1Btn.Location = New System.Drawing.Point(712, 53)
+        Me.newImport1Btn.Name = "newImport1Btn"
+        Me.newImport1Btn.Size = New System.Drawing.Size(75, 23)
+        Me.newImport1Btn.TabIndex = 2
+        Me.newImport1Btn.Text = "覆盖导入"
+        Me.newImport1Btn.UseVisualStyleBackColor = True
         '
         'selectFile1Btn
         '
@@ -97,17 +98,28 @@ Partial Class importPage
         Me.Label1.TabIndex = 6
         Me.Label1.Text = "DpCode表位置"
         '
+        'setExcelTitleBtn
+        '
+        Me.setExcelTitleBtn.Font = New System.Drawing.Font("宋体", 9.0!)
+        Me.setExcelTitleBtn.Location = New System.Drawing.Point(809, 52)
+        Me.setExcelTitleBtn.Name = "setExcelTitleBtn"
+        Me.setExcelTitleBtn.Size = New System.Drawing.Size(107, 23)
+        Me.setExcelTitleBtn.TabIndex = 7
+        Me.setExcelTitleBtn.Text = "设定excel标题"
+        Me.setExcelTitleBtn.UseVisualStyleBackColor = True
+        '
         'importPage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(928, 450)
+        Me.Controls.Add(Me.setExcelTitleBtn)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.selectFile2Btn)
         Me.Controls.Add(Me.TextBox2)
         Me.Controls.Add(Me.selectFile1Btn)
-        Me.Controls.Add(Me.newImport1)
-        Me.Controls.Add(Me.addImport1)
+        Me.Controls.Add(Me.newImport1Btn)
+        Me.Controls.Add(Me.addImport1Btn)
         Me.Controls.Add(Me.TextBox1)
         Me.Name = "importPage"
         Me.Text = "导入页面"
@@ -117,10 +129,11 @@ Partial Class importPage
     End Sub
 
     Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents addImport1 As Button
-    Friend WithEvents newImport1 As Button
+    Friend WithEvents addImport1Btn As Button
+    Friend WithEvents newImport1Btn As Button
     Friend WithEvents selectFile1Btn As Button
     Friend WithEvents selectFile2Btn As Button
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents setExcelTitleBtn As Button
 End Class

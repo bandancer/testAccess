@@ -13,7 +13,7 @@ Public Class ConnectionAccess
 
         '初始化con的连接属性，使用OLEDB模式，数据源为：你指定下路径，我的是在D盘
         'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\dataSample.mdb
-        con.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\testAccess.accdb"
+        con.ConnectionString = "Provider=Microsoft.Jet.OleDb.4.0;Data Source=" & settingPage.accessPath.Text
         '打开OLEDB数据连接
         con.Open()
         '初始化OLEDB命令的连接属性为con,这个需要你理解下

@@ -2,50 +2,74 @@
 
 Public Class OperationExcel
 
-    Sub connectToExcel(ByVal fileName As String, ByVal sheetNum As String)
+    Private myDataset1
+
+    Private Sub connectToExcel(ByVal fileName As String, ByVal sheetNum As String)
 
         'Use below code to retrieve data from an Excel file. 
         'Code to open the file here. 
         Dim strConn As String = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source='" & fileName & "';Extended Properties=Excel 8.0;"
 
         'Now using the OledbDataAdapter you can query the excel sheet. 
-        Dim myDataset1 As New DataSet
-
+        myDataset1 = New DataSet
 
         Dim da As New OleDb.OleDbDataAdapter("SELECT * FROM [" & sheetNum & "]", strConn)
         da.TableMappings.Clear()
         da.TableMappings.Add("Table", "ExcelTest")
         da.Fill(myDataset1)
 
-        Dim s As Integer
-        Dim sql As String
-        Dim connStr As String = "Provider=Microsoft.Jet.OleDb.4.0;Data Source=" & settingPage.accessPath.Text
-        Dim cn As OleDbConnection = New OleDbConnection(connStr)
-        Dim MyCommand As OleDbCommand
-
-        cn.Open()
-        Dim zd1 As String, zd2 As String, zd3 As String, zd4 As String, zd5 As String, zd6 As String
-        For s = 0 To myDataset1.Tables(0).Rows.Count - 1
-            zd1 = myDataset1.Tables(0).Rows(s).Item("字段1") & ""
-            zd2 = myDataset1.Tables(0).Rows(s).Item("字段2") & ""
-            zd3 = myDataset1.Tables(0).Rows(s).Item("字段3") & ""
-            zd4 = myDataset1.Tables(0).Rows(s).Item("字段4") & ""
-            zd5 = myDataset1.Tables(0).Rows(s).Item("字段5") & ""
-            zd6 = myDataset1.Tables(0).Rows(s).Item("字段6") & ""
-
-            sql = "INSERT INTO 供应商(字段1,字段2,字段3,字段4,字段5,字段6) VALUES('" & zd1 & "','" & zd2 & "', '" & zd3 & "','" & zd4 & "','" & zd5 & "','" & zd6 & "')"
-            MyCommand = New OleDbCommand(sql, cn)
-            MyCommand.ExecuteNonQuery()
-        Next
-
-        MsgBox("导入成功！")
-
     End Sub
 
-    Public Function importExcelData()
+    ''' <summary>
+    ''' 把excel数据导入数据库中
+    ''' </summary>
+    ''' <param name="fileName">excel文件名</param>
+    ''' <param name="sheetNum">sheet名</param>
+    ''' <param name="excelTitle">excel数据标题List</param>
+    ''' <param name="table">数据库表</param>
+    ''' <param name="tableTitle">数据库表字段名List</param>
+    Public Sub importExcel(ByVal fileName As String, ByVal sheetNum As String, ByVal excelTitle As List(Of String), ByVal table As BaseSql, ByVal tableTitle As List(Of String))
 
-    End Function
+        '读取excel
+        If fileName Is Nothing Or fileName = "" Then
+            MsgBox("请选择文件！")
+            Return
+        End If
+        '默认取得sheet1的数据
+        If sheetNum Is Nothing Then sheetNum = "sheet1"
+        connectToExcel(fileName, sheetNum)
 
+        If tableTitle.Count = 0 Then
+            MsgBox("excel列数与表不一致，请确认！")
+        End If
+
+        If tableTitle.Count <> excelTitle.Count Then
+            MsgBox("excel列数与表不一致，请确认！")
+        End If
+
+        Dim dpCodeTable As DpCodeTable = New DpCodeTable
+        Dim dataList As List(Of String) = New List(Of String)
+
+        '插入数据库
+        For s = 0 To myDataset1.Tables(0).Rows.Count - 1
+
+            '拼接值
+            dataList = New List(Of String)
+            For n = 0 To excelTitle.Count - 1
+                dataList.Add(myDataset1.Tables(0).Rows(s).Item(excelTitle.ElementAt(n)))
+            Next
+
+            '拼接成sql
+            table.insertByTitle(tableTitle, dataList)
+        Next
+        MsgBox("导入成功！")
+    End Sub
+    ''' <summary>
+    ''' 把datagrid数据导出到excel
+    ''' </summary>
+    ''' <param name="x">datagrid</param>
+    ''' <param name="sheetName">sheet名</param>
+    ''' <returns></returns>
     Public Function exportExcel(ByVal x As DataGridView, ByVal sheetName As String) As Boolean '导出到Excel函数
         Try
             If x.Rows.Count <= 0 Then '判断记录数,如果没有记录就退出
