@@ -13,7 +13,7 @@
     ''' </summary>
     ''' <param name="titleList">自定义字段名List</param>
     ''' <param name="dataList">数据</param>
-    Public Sub insertByTitle(ByVal titleList As List(Of String), ByVal dataList As List(Of String))
+    Public Sub insertByTitle(ByVal titleList As List(Of String), ByVal dataList As List(Of Object))
         columns = New List(Of String)
         If titleList IsNot Nothing Then
             columns = titleList
@@ -25,11 +25,11 @@
     ''' 插入数据库
     ''' </summary>
     ''' <param name="dataList">数据</param>
-    Public Sub insert(ByVal dataList As List(Of String))
+    Public Sub insert(ByVal dataList As List(Of Object))
         insertIntoTable(dataList)
     End Sub
 
-    Protected Sub insertIntoTable(ByVal dataList As List(Of String))
+    Protected Sub insertIntoTable(ByVal dataList As List(Of Object))
 
         If columns.Count = 0 Then
             MsgBox("列数与表不一致，请确认！")

@@ -13,7 +13,7 @@ Public Class OperationExcel
         'Now using the OledbDataAdapter you can query the excel sheet. 
         myDataset1 = New DataSet
 
-        Dim da As New OleDb.OleDbDataAdapter("SELECT * FROM [" & sheetNum & "]", strConn)
+        Dim da As New OleDb.OleDbDataAdapter("SELECT * FROM [" & sheetNum & "$]", strConn)
         da.TableMappings.Clear()
         da.TableMappings.Add("Table", "ExcelTest")
         da.Fill(myDataset1)
@@ -39,22 +39,14 @@ Public Class OperationExcel
         If sheetNum Is Nothing Then sheetNum = "sheet1"
         connectToExcel(fileName, sheetNum)
 
-        If tableTitle.Count = 0 Then
-            MsgBox("excel列数与表不一致，请确认！")
-        End If
-
-        If tableTitle.Count <> excelTitle.Count Then
-            MsgBox("excel列数与表不一致，请确认！")
-        End If
-
         Dim dpCodeTable As DpCodeTable = New DpCodeTable
-        Dim dataList As List(Of String) = New List(Of String)
+        Dim dataList As List(Of Object) = New List(Of Object)
 
         '插入数据库
         For s = 0 To myDataset1.Tables(0).Rows.Count - 1
 
             '拼接值
-            dataList = New List(Of String)
+            dataList = New List(Of Object)
             For n = 0 To excelTitle.Count - 1
                 dataList.Add(myDataset1.Tables(0).Rows(s).Item(excelTitle.ElementAt(n)))
             Next

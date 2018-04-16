@@ -39,6 +39,7 @@ Partial Class importPage
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(380, 24)
         Me.TextBox1.TabIndex = 0
+        Me.TextBox1.Text = "E:\myThing\testAccess\QAD导出文件\dpcode.xls"
         '
         'addImport1Btn
         '
